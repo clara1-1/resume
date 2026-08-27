@@ -5,369 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>硬件测试工程师简历</title>
     <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.1/dist/cropper.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.1/dist/cropper.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/html5-image-resizer@1.0.0/dist/image-resizer.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background-color: #e9e9e9;
-            font-family: "Microsoft YaHei", "SimSun", sans-serif;
-            padding: 20px;
-        }
-        .toolbar {
-            max-width: 210mm;
-            margin: 0 auto 12px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        .toolbar button {
-            padding: 6px 14px;
-            cursor: pointer;
-            border: 1px solid #333;
-            background: #fff;
-            border-radius: 4px;
-        }
-        /* A4纸张容器 */
-        .a4-page {
-            width: 210mm;
-            min-height: 297mm;
-            background: #ffffff;
-            margin: 0 auto;
-            padding: 22mm 20mm 20mm 20mm;
-            position: relative;
-            overflow: hidden;
-        }
-        /* 证件照容器 右上角 */
-        .photo-wrap {
-            position: absolute;
-            top: 18mm;
-            right: 20mm;
-            width: 95px;
-            height: 125px;
-            border: 1px solid #aaa;
-        }
-        .photo-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .photo-empty-tip {
-            width:100%;
-            height:100%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:11px;
-            color:#777;
-            text-align:center;
-        }
-        .photo-ops {
-            position:absolute;
-            bottom:-24px;
-            left:0;
-            width:100%;
-            display:flex;
-            justify-content:space-between;
-        }
-        .photo-ops button {
-            font-size:10px;
-            padding:1px 4px;
-            border:1px solid #999;
-            background:#fff;
-            cursor:pointer;
-        }
-        /* 弹窗裁切 */
-        .cropper-modal {
-            position:fixed;
-            inset:0;
-            background:rgba(0,0,0,0.65);
-            z-index:999;
-            display:none;
-            align-items:center;
-            justify-content:center;
-        }
-        .cropper-box {
-            width:520px;
-            background:#fff;
-            padding:16px;
-        }
-        #cropper-img-container {
-            height:360px;
-        }
-        .cropper-buttons {
-            margin-top:10px;
-            display:flex;
-            justify-content:flex-end;
-            gap:8px;
-        }
-        /* 简历文本样式 */
-        .header-info {
-            margin-right:110px;
-        }
-        .header-info h1 {
-            font-size:22px;
-            font-weight:bold;
-            margin-bottom:6px;
-        }
-        .contact-row {
-            font-size:13px;
-            color:#222;
-            line-height:1.6;
-        }
-        section {
-            margin-top:16px;
-        }
-        section h2 {
-            font-size:16px;
-            font-weight:bold;
-            border-bottom:1px solid #444;
-            padding-bottom:3px;
-            margin-bottom:8px;
-        }
-        .item-block {
-            margin-bottom:10px;
-        }
-        .item-head {
-            display:flex;
-            justify-content:space-between;
-            font-size:14px;
-            font-weight:bold;
-            margin-bottom:4px;
-        }
-        ul {
-            padding-left:18px;
-            font-size:13px;
-            line-height:1.55;
-        }
-        p {
-            font-size:13px;
-            line-height:1.55;
-        }
-        .course-list, .award-text {
-            font-size:13px;
-            line-height:1.55;
-        }
-        /* 打印PDF设置 */
-        @media print {
-            body {
-                background: #fff;
-                padding:0;
-            }
-            .toolbar, .photo-ops, .cropper-modal {
-                display: none !important;
-            }
-            .a4-page {
-                width: 100%;
-                height:100%;
-                padding: 22mm 20mm 20mm 20mm;
-                margin:0;
-            }
-        }
-    </style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#eeeeee;font-family:"Microsoft Yahei",SimHei,sans-serif;padding:20px;}
+.resume-wrap{width:210mm;min-height:297mm;background:#ffffff;margin:0 auto;padding:24px;position:relative;}
+.export-btn{position:fixed;top:8px;right:12px;padding:4px 10px;background:#3670c9;color:white;border:none;border-radius:4px;cursor:pointer;z-index:99;}
+.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.header-left h1{font-size:32px;font-weight:bold;}
+.header-left .job-title{font-size:18px;color:#444;margin:4px 0 12px;}
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;}
+.avatar-box{width:130px;height:160px;border:1px solid #aaa;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.avatar-box img{width:100%;height:100%;object-fit:cover;}
+.avatar-box input{width:100%;height:100%;opacity:0;position:absolute;cursor:pointer;}
+.section{margin-top:18px;}
+.section-title{background:#4472b0;color:white;padding:4px 8px;font-size:17px;font-weight:bold;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.item-block{margin-bottom:12px;}
+.item-head{display:flex;justify-content:space-between;font-weight:bold;font-size:15px;margin-bottom:4px;}
+p,li{font-size:14px;line-height:1.6;text-align:justify;}
+ul{padding-left:18px;}
+[contenteditable="true"]:focus{outline:#5b98e8 solid 1px;background:#f4f8ff;}
+@media print{
+    body{background:white;padding:0;}
+    .resume-wrap{width:100%;padding:0;}
+    .export-btn{display:none;}
+}
+</style>
 </head>
 <body>
-    <div class="toolbar">
-        <button id="exportPdfBtn">导出PDF(A4)</button>
+<button class="export-btn" onclick="exportPdf()">导出PDF(A4)</button>
+<div class="resume-wrap" id="resume">
+    <div class="header">
+        <div class="header-left">
+            <h1 contenteditable="true">李大大</h1>
+            <div class="job-title" contenteditable="true">求职意向：硬件测试工程师</div>
+            <div class="info-row">
+                <div>📅 生日：<span contenteditable="true">2004年4月</span></div>
+                <div>💬 微信：<span contenteditable="true">ABC2244668810</span></div>
+                <div>📞 电话：<span contenteditable="true">18276232530</span></div>
+                <div>📧 邮箱：<span contenteditable="true">qin20260606@163.com</span></div>
+            </div>
+        </div>
+        <div class="avatar-box">
+            <img id="avatarImg" src="" alt="证件照">
+            <input type="file" accept="image/*" id="avatarUpload">
+        </div>
     </div>
 
-    <div class="a4-page" id="resumeContent">
-        <!-- 右上角证件照区域 -->
-        <div class="photo-wrap" id="photoWrap">
-            <div class="photo-empty-tip" id="photoPlaceholder">点击上传证件照</div>
-            <img id="resumePhoto" style="display:none;" alt="证件照">
-            <div class="photo-ops">
-                <button id="uploadPhotoBtn">上传</button>
-                <button id="deletePhotoBtn">删除</button>
+    <div class="section">
+        <div class="section-title">🎓 教育背景</div>
+        <div class="item-block">
+            <div class="item-head">
+                <span contenteditable="true">毕业时间：2027年 &nbsp;&nbsp;&nbsp;院校：桂林电子科技大学 &nbsp;&nbsp;&nbsp;专业：通信工程</span>
             </div>
-            <input type="file" accept="image/*" id="photoFileInput" style="display:none;">
+            <p contenteditable="true">主修课程：模电、数电、通信原理、高频电子电路、信号与系统分析</p>
+            <p contenteditable="true">荣誉奖项：校级三好学生（15%）、校级优秀奖学金、优秀团员、校电子设计大赛优秀奖、优秀先进工作者</p>
         </div>
+    </div>
 
-        <!-- 头部个人信息 -->
-        <div class="header-info">
-            <h1>李大大</h1>
-            <div class="contact-row">
-                求职意向：硬件测试工程师<br>
-                生日：2004年4月 &nbsp;&nbsp;微信：ABC2244668810<br>
-                电话: 18276232530 &nbsp;&nbsp;邮箱：qin20260606@163.com
+    <div class="section">
+        <div class="section-title">💼 实习经历</div>
+        <div class="item-block">
+            <div class="item-head">
+                <span contenteditable="true">2026.5‑2026‑11 &nbsp;&nbsp;麦格米特电气技术有限公司 &nbsp;&nbsp;安规认证助理工程师</span>
             </div>
-        </div>
-
-        <!-- 教育背景 -->
-        <section>
-            <h2>教育背景</h2>
-            <div class="item-block">
-                <div class="item-head">
-                    <span>桂林电子科技大学｜通信工程</span>
-                    <span>毕业时间：2027年</span>
-                </div>
-                <p class="course-list">主修课程：模电、数电、通信原理、高频电子电路、信号与系统分析</p>
-                <p class="award-text">荣誉奖项：校级三好学生（15%）、校级优秀奖学金、优秀团员、校电子设计大赛优秀奖、优秀先进工作者</p>
-            </div>
-        </section>
-
-        <!-- 实习经历 -->
-        <section>
-            <h2>实习经历</h2>
-            <div class="item-block">
-                <div class="item-head">
-                    <span>麦格米特电气技术有限公司｜安规认证助理工程师</span>
-                    <span>2026.05‑2026.11（6个月）</span>
-                </div>
-                <ul>
-                    <li><b>测试实操：</b>围绕IEC62368、IEC60601标准，熟练掌握46项安规测试，独立完成医疗电源、工控电源、商显产品耐压、温升、球压、单一故障、燃烧等试验。</li>
-                    <li><b>研发协同：</b>编制关键元器件清单，开发阶段对接研发，输出安规标准要求，前置管控硬件结构，规避合规风险。</li>
-                    <li><b>项目推进：</b>对接第三方实验室样品送测；针对不合格项对照标准定位风险，输出整改方案；维护证书台账，参与CNAS审核资料筹备。</li>
-                    <li><b>工作成果：</b>协助23款产品办理CCC、UL认证，推动多项不合格项闭环整改，减少认证返工，保障产品安全合规。</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 项目经历 -->
-        <section>
-            <h2>项目经历</h2>
-            <div class="item-block">
-                <div class="item-head">
-                    <span>多功能自主巡检智能小车设计与实现｜负责人</span>
-                    <span>2025.03</span>
-                </div>
-                <ul>
-                    <li><b>硬件搭建验证：</b>基于STM32搭建硬件平台，完成传感器、电机驱动电路信号测试，校验PWM控制与通信稳定性，保障硬件可靠性。</li>
-                    <li><b>场景功能测试：</b>设计避障、寻迹、遥控测试用例；直线行驶偏差≤10mm，避障响应≤1s，输出测试报告，闭环处理缺陷。</li>
-                    <li><b>可测性优化：</b>硬件选型预留测试点，提升调试与故障排查效率。</li>
-                </ul>
-            </div>
-
-            <div class="item-block">
-                <div class="item-head">
-                    <span>双音色电子琴与倒计时交互系统｜个人项目</span>
-                    <span>2024.04</span>
-                </div>
-                <ul>
-                    <li><b>发声驱动开发：</b>STM32定时器输出多频PWM，驱动蜂鸣器实现7种以上音阶输出，音色切换响应≤50ms。</li>
-                    <li><b>人机交互设计：</b>按键完成功能切换，OLED实时显示状态，交互准确率≥98%。</li>
-                    <li><b>附加功能调试：</b>实现5/10/30s倒计时，计时误差≤1%；实现钢琴、手风琴两种音色，完成整机联调稳定性验证。</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 校园经历 -->
-        <section>
-            <h2>校园经历</h2>
-            <div class="item-block">
-                <div class="item-head">
-                    <span>校融媒体中心｜学生干部</span>
-                    <span>2023‑2025</span>
-                </div>
-                <ul>
-                    <li>协助老师开展新闻宣传、内容策划与摄影，完成30余次新闻任务，发布20余篇公众号推文。</li>
-                </ul>
-            </div>
-            <div class="item-block">
-                <div class="item-head">
-                    <span>班级心理委员｜班干部</span>
-                    <span>2024‑2026</span>
-                </div>
-                <ul>
-                    <li>配合学院开展朋辈帮扶，服务学生120余人；牵头班级团建学风建设，班级获评“五四先进集体”。</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 个人技能 -->
-        <section>
-            <h2>个人技能</h2>
             <ul>
-                <li>熟悉嘉立创、Altium Designer、Keil、Visual Studio、Mworks、Matlab、Multisim等软件。</li>
-                <li>熟练使用示波器、万用表、信号源等测试仪器；具备基础焊接与硬件调试能力。</li>
-                <li>电子电路基础扎实，掌握C、Python语言，具备单片机开发能力。</li>
-                <li>CET‑4，可阅读英文数据手册，具备电路设计与仿真能力。</li>
+                <li contenteditable="true">测试实操：围绕IEC62368、IEC60601标准，熟练掌握46项安规测试，独立完成医疗电源产品、工控电源产品、商显产品的耐压、温升、球压、单故障、燃烧等试验。</li>
+                <li contenteditable="true">研发协同：编制关键元器件清单，产品开发阶段对接研发团队，输出安规标准要求，提前管控硬件结构，从源头规避合规风险。</li>
+                <li contenteditable="true">项目推进：对接第三方实验室完成样品送测；针对测试不合格项对照标准定位风险，输出落地整改方案；维护证书台账，参与CCC与CNAS审核资料筹备。</li>
+                <li contenteditable="true">工作成果：目前已协助23款产品办理CCC、UL认证，推动多项不合格项闭环整改，减少认证返工，保障产品安全合规。</li>
             </ul>
-        </section>
-    </div>
-
-    <!-- 图片裁切弹窗 -->
-    <div class="cropper-modal" id="cropperModal">
-        <div class="cropper-box">
-            <div id="cropper-img-container"></div>
-            <div class="cropper-buttons">
-                <button id="cropConfirm">确认裁切</button>
-                <button id="cropCancel">取消</button>
-            </div>
         </div>
     </div>
 
-    <script>
-        // 照片上传裁切逻辑
-        const uploadBtn = document.getElementById('uploadPhotoBtn');
-        const fileInput = document.getElementById('photoFileInput');
-        const photoImg = document.getElementById('resumePhoto');
-        const placeholder = document.getElementById('photoPlaceholder');
-        const delBtn = document.getElementById('deletePhotoBtn');
-        const modal = document.getElementById('cropperModal');
-        const cropContainer = document.getElementById('cropper-img-container');
-        const cropConfirm = document.getElementById('cropConfirm');
-        const cropCancel = document.getElementById('cropCancel');
-        let cropper = null;
+    <div class="section">
+        <div class="section-title">🔧 项目经历</div>
+        <div class="item-block">
+            <div class="item-head">
+                <span contenteditable="true">2025.03 &nbsp;&nbsp;多功能自主巡检智能小车设计与实现 &nbsp;&nbsp;负责人</span>
+            </div>
+            <ul>
+                <li contenteditable="true">硬件搭建验证：基于STM32搭建硬件平台，完成传感器、电机驱动电路信号测试，校验PWM控制与通信稳定性，保障硬件可靠性。</li>
+                <li contenteditable="true">场景功能测试：设计避障、寻迹、遥控测试用例；直线行驶偏差≤10mm，避障响应≤1s，输出测试报告，闭环处理缺陷。</li>
+                <li contenteditable="true">可测性优化：硬件选型预留测试点，提升调试与故障排查效率。</li>
+            </ul>
+        </div>
+        <div class="item-block">
+            <div class="item-head">
+                <span contenteditable="true">2024.04 &nbsp;&nbsp;双音色电子琴与倒计时交互系统 &nbsp;&nbsp;个人项目</span>
+            </div>
+            <ul>
+                <li contenteditable="true">发声驱动开发：STM32定时器输出多频PWM，驱动蜂鸣器实现7种以上音阶输出，音色切换响应≤50ms。</li>
+                <li contenteditable="true">人机交互设计：按键完成功能切换，OLED实时显示状态，交互准确率≥98%。</li>
+                <li contenteditable="true">附加功能调试：实现5/10/30s倒计时，计时误差≤1%，完成多音色联调与整机稳定性验证。</li>
+            </ul>
+        </div>
+    </div>
 
-        uploadBtn.onclick = ()=> fileInput.click();
-        delBtn.onclick = ()=>{
-            photoImg.style.display = 'none';
-            placeholder.style.display = 'flex';
-            photoImg.src = '';
-        };
+    <div class="section">
+        <div class="section-title">📋 校园经历</div>
+        <div class="item-block">
+            <div class="item-head">
+                <span contenteditable="true">2023‑2025 &nbsp;&nbsp;校融媒体中心 &nbsp;&nbsp;学生干部</span>
+            </div>
+            <p contenteditable="true">协助老师负责新闻宣传、内容策划与摄影，完成30余次新闻任务，发布20余篇高浏览量公众号推文。</p>
+        </div>
+        <div class="item-block">
+            <div class="item-head">
+                <span contenteditable="true">2024‑2026 &nbsp;&nbsp;班级 &nbsp;&nbsp;心理委员 / 班干部</span>
+            </div>
+            <p contenteditable="true">担任班级心理委员，配合学院开展朋辈帮扶，服务学生120余人；牵头班级团建与学风建设，所在班级获“五四先进集体”。</p>
+        </div>
+    </div>
 
-        fileInput.onchange = function(e){
-            const file = e.target.files[0];
-            if(!file) return;
-            const reader = new FileReader();
-            reader.onload = function(ev){
-                modal.style.display = 'flex';
-                cropContainer.innerHTML = `<img id="cropSourceImg" src="${ev.target.result}">`;
-                const imgDom = document.getElementById('cropSourceImg');
-                if(cropper) cropper.destroy();
-                cropper = new Cropper(imgDom, {
-                    aspectRatio: 95 / 125, //证件照比例
-                    viewMode:1,
-                    autoCropArea:0.85
-                });
-            }
-            reader.readAsDataURL(file);
-        }
+    <div class="section">
+        <div class="section-title">⚙️ 个人技能</div>
+        <ul>
+            <li contenteditable="true">熟悉嘉立创、Altium Designer、Keil、Visual Studio、Mworks、Matlab、Multisim等软件的使用。</li>
+            <li contenteditable="true">熟练使用示波器、万用表、信号源等测试仪器的使用，具备基础焊接与硬件调试能力。</li>
+            <li contenteditable="true">具备良好的电子电路基础，熟悉C、python语言，具有一定的单片机开发能力。</li>
+            <li contenteditable="true">英文水平CET‑4，掌握阅读英文数据手册的能力，能够进行电路设计与仿真。</li>
+        </ul>
+    </div>
+</div>
 
-        cropConfirm.onclick = function(){
-            if(!cropper) return;
-            const canvas = cropper.getCroppedCanvas({width:190,height:250});
-            photoImg.src = canvas.toDataURL("image/png");
-            photoImg.style.display = 'block';
-            placeholder.style.display = 'none';
-            modal.style.display = 'none';
-            cropper.destroy();
-            cropper = null;
-        }
-        cropCancel.onclick = function(){
-            modal.style.display = 'none';
-            if(cropper) cropper.destroy();
-            cropper = null;
-        }
-
-        //导出PDF
-        document.getElementById('exportPdfBtn').onclick = function(){
-            const element = document.getElementById('resumeContent');
-            const opt = {
-                margin:0,
-                filename:'李大大‑硬件测试工程师简历.pdf',
-                image: { type: 'jpeg', quality: 0.96 },
-                html2canvas: {scale:2, useCORS:true},
-                jsPDF: {unit:'mm', format:'a4', orientation:'portrait'}
-            };
-            html2pdf().set(opt).from(element).save();
-        }
-    </script>
+<script>
+//头像上传
+const avatarUpload=document.getElementById('avatarUpload');
+const avatarImg=document.getElementById('avatarImg');
+avatarUpload.onchange=function(e){
+    const file=e.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>avatarImg.src=ev.target.result;
+    reader.readAsDataURL(file);
+}
+//导出PDF
+function exportPdf(){
+    const opt={
+        margin:8,
+        filename:"硬件测试工程师简历.pdf",
+        image:{type:'jpeg',quality:0.98},
+        html2canvas:{scale:2},
+        jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+    };
+    const el=document.getElementById('resume');
+    html2pdf().set(opt).from(el).save();
+}
+</script>
 </body>
 </html>

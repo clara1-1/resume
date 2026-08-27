@@ -1,156 +1,120 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>硬件测试工程师简历</title>
-    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html5-image-resizer@1.0.0/dist/image-resizer.min.js"></script>
-    <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:#eeeeee;font-family:"Microsoft Yahei",SimHei,sans-serif;padding:20px;}
-.resume-wrap{width:210mm;min-height:297mm;background:#ffffff;margin:0 auto;padding:24px;position:relative;}
-.export-btn{position:fixed;top:8px;right:12px;padding:4px 10px;background:#3670c9;color:white;border:none;border-radius:4px;cursor:pointer;z-index:99;}
-.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
-.header-left h1{font-size:32px;font-weight:bold;}
-.header-left .job-title{font-size:18px;color:#444;margin:4px 0 12px;}
-.info-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:14px;}
-.avatar-box{width:130px;height:160px;border:1px solid #aaa;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.avatar-box img{width:100%;height:100%;object-fit:cover;}
-.avatar-box input{width:100%;height:100%;opacity:0;position:absolute;cursor:pointer;}
-.section{margin-top:18px;}
-.section-title{background:#4472b0;color:white;padding:4px 8px;font-size:17px;font-weight:bold;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-.item-block{margin-bottom:12px;}
-.item-head{display:flex;justify-content:space-between;font-weight:bold;font-size:15px;margin-bottom:4px;}
-p,li{font-size:14px;line-height:1.6;text-align:justify;}
-ul{padding-left:18px;}
-[contenteditable="true"]:focus{outline:#5b98e8 solid 1px;background:#f4f8ff;}
+<meta charset="UTF-8"/>
+<base href="/resume/">
+<title>硬件测试工程师简历</title>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#eeeeee;padding:20px;font-family:"Microsoft YaHei",SimHei,sans-serif;}
+.exportBtn{position:fixed;top:8px;right:12px;background:#3670c9;color:#fff;padding:4px 10px;border:none;border-radius:4px;cursor:pointer;z-index:999;}
+.resume-container{
+    width:210mm;
+    height:297mm;
+    position:relative;
+    margin:0 auto;
+    background:url("./bg.jpg") no-repeat center;
+    background-size:210mm 297mm;
+}
+.txt{
+    position:absolute;
+    font-size:13.5px;
+    line-height:1.6;
+}
+.txt:focus{outline:#2b62bc solid 1px;background:rgba(255,255,255,0.65);}
+.name{top:14mm;left:12mm;font-size:32px;font-weight:bold;}
+.jobtitle{top:16mm;left:42mm;font-size:17px;color:#333;}
+.info1{top:28mm;left:12mm;font-size:14px;}
+.info2{top:28mm;left:48mm;font-size:14px;}
+.edu-text{top:48mm;left:12mm;right:12mm;font-size:13.2px;}
+.intern-text{top:82mm;left:12mm;right:12mm;font-size:13.2px;}
+.project-text{top:144mm;left:12mm;right:12mm;font-size:13.2px;}
+.school-text{top:210mm;left:12mm;right:12mm;font-size:13.2px;}
+.skill-text{top:248mm;left:12mm;right:12mm;font-size:13.2px;}
+.avatar-upload{
+    position:absolute;
+    top:10mm;
+    right:12mm;
+    width:82mm;
+    height:98mm;
+}
+.avatar-upload img{width:100%;height:100%;object-fit:cover;}
+.avatar-upload input{
+    width:100%;height:100%;opacity:0;position:absolute;cursor:pointer;
+}
 @media print{
-    body{background:white;padding:0;}
-    .resume-wrap{width:100%;padding:0;}
-    .export-btn{display:none;}
+    body{background:#fff;padding:0;}
+    .resume-container{margin:0;}
+    .exportBtn{display:none;}
 }
 </style>
 </head>
 <body>
-<button class="export-btn" onclick="exportPdf()">导出PDF(A4)</button>
-<div class="resume-wrap" id="resume">
-    <div class="header">
-        <div class="header-left">
-            <h1 contenteditable="true">李大大</h1>
-            <div class="job-title" contenteditable="true">求职意向：硬件测试工程师</div>
-            <div class="info-row">
-                <div>📅 生日：<span contenteditable="true">2004年4月</span></div>
-                <div>💬 微信：<span contenteditable="true">ABC2244668810</span></div>
-                <div>📞 电话：<span contenteditable="true">18276232530</span></div>
-                <div>📧 邮箱：<span contenteditable="true">qin20260606@163.com</span></div>
-            </div>
-        </div>
-        <div class="avatar-box">
-            <img id="avatarImg" src="" alt="证件照">
-            <input type="file" accept="image/*" id="avatarUpload">
-        </div>
+<button class="exportBtn" onclick="exportPdf()">导出PDF(A4)</button>
+<div class="resume-container">
+    <div class="avatar-upload">
+        <img id="avatarImg" alt="证件照">
+        <input type="file" accept="image/*" id="avatarInput">
     </div>
-
-    <div class="section">
-        <div class="section-title">🎓 教育背景</div>
-        <div class="item-block">
-            <div class="item-head">
-                <span contenteditable="true">毕业时间：2027年 &nbsp;&nbsp;&nbsp;院校：桂林电子科技大学 &nbsp;&nbsp;&nbsp;专业：通信工程</span>
-            </div>
-            <p contenteditable="true">主修课程：模电、数电、通信原理、高频电子电路、信号与系统分析</p>
-            <p contenteditable="true">荣誉奖项：校级三好学生（15%）、校级优秀奖学金、优秀团员、校电子设计大赛优秀奖、优秀先进工作者</p>
-        </div>
+    <div class="txt name" contenteditable="true">李大大</div>
+    <div class="txt jobtitle" contenteditable="true">求职意向：硬件测试工程师</div>
+    <div class="txt info1" contenteditable="true">生日：2004年4月 电话：18276232530</div>
+    <div class="txt info2" contenteditable="true">微信：ABC2244668810 邮箱：qin20260606@163.com</div>
+    <div class="txt edu-text" contenteditable="true">
+毕业时间：2027年 院校：桂林电子科技大学 专业：通信工程<br>
+主修课程：模电、数电、通信原理、高频电子电路、信号与系统分析<br>
+荣誉奖项：校级三好学生（15%）、校级优秀奖学金、优秀团员、校电子设计大赛优秀奖、优秀先进工作者
     </div>
-
-    <div class="section">
-        <div class="section-title">💼 实习经历</div>
-        <div class="item-block">
-            <div class="item-head">
-                <span contenteditable="true">2026.5‑2026‑11 &nbsp;&nbsp;麦格米特电气技术有限公司 &nbsp;&nbsp;安规认证助理工程师</span>
-            </div>
-            <ul>
-                <li contenteditable="true">测试实操：围绕IEC62368、IEC60601标准，熟练掌握46项安规测试，独立完成医疗电源产品、工控电源产品、商显产品的耐压、温升、球压、单故障、燃烧等试验。</li>
-                <li contenteditable="true">研发协同：编制关键元器件清单，产品开发阶段对接研发团队，输出安规标准要求，提前管控硬件结构，从源头规避合规风险。</li>
-                <li contenteditable="true">项目推进：对接第三方实验室完成样品送测；针对测试不合格项对照标准定位风险，输出落地整改方案；维护证书台账，参与CCC与CNAS审核资料筹备。</li>
-                <li contenteditable="true">工作成果：目前已协助23款产品办理CCC、UL认证，推动多项不合格项闭环整改，减少认证返工，保障产品安全合规。</li>
-            </ul>
-        </div>
+    <div class="txt intern-text" contenteditable="true">
+2026.5‑2026‑11 麦格米特电气技术有限公司 安规认证助理工程师<br>
+‑测试实操：围绕IEC62368、IEC60601标准，熟练掌握46项安规测试，独立完成医疗电源产品、工控电源产品、商显产品的耐压、温升、球压、单一故障、燃烧等试验。<br>
+‑研发协同：编制关键元器件清单，产品开发阶段对接研发团队，输出安规标准要求，提前管控硬件结构，从源头规避合规风险。<br>
+‑项目推进：对接第三方实验室完成样品送测；针对测试不合格项对照标准定位风险，输出落地整改方案；维护证书台账，参与CNAS审核资料筹备。<br>
+‑工作成果：目前已协助23款产品办理CCC、UL认证，推动多项不合格项闭环整改，减少认证返工，保障产品安全合规。
     </div>
-
-    <div class="section">
-        <div class="section-title">🔧 项目经历</div>
-        <div class="item-block">
-            <div class="item-head">
-                <span contenteditable="true">2025.03 &nbsp;&nbsp;多功能自主巡检智能小车设计与实现 &nbsp;&nbsp;负责人</span>
-            </div>
-            <ul>
-                <li contenteditable="true">硬件搭建验证：基于STM32搭建硬件平台，完成传感器、电机驱动电路信号测试，校验PWM控制与通信稳定性，保障硬件可靠性。</li>
-                <li contenteditable="true">场景功能测试：设计避障、寻迹、遥控测试用例；直线行驶偏差≤10mm，避障响应≤1s，输出测试报告，闭环处理缺陷。</li>
-                <li contenteditable="true">可测性优化：硬件选型预留测试点，提升调试与故障排查效率。</li>
-            </ul>
-        </div>
-        <div class="item-block">
-            <div class="item-head">
-                <span contenteditable="true">2024.04 &nbsp;&nbsp;双音色电子琴与倒计时交互系统 &nbsp;&nbsp;个人项目</span>
-            </div>
-            <ul>
-                <li contenteditable="true">发声驱动开发：STM32定时器输出多频PWM，驱动蜂鸣器实现7种以上音阶输出，音色切换响应≤50ms。</li>
-                <li contenteditable="true">人机交互设计：按键完成功能切换，OLED实时显示状态，交互准确率≥98%。</li>
-                <li contenteditable="true">附加功能调试：实现5/10/30s倒计时，计时误差≤1%，完成多音色联调与整机稳定性验证。</li>
-            </ul>
-        </div>
+    <div class="txt project-text" contenteditable="true">
+2025.03 多功能自主巡检智能小车设计与实现 负责人<br>
+‑硬件搭建验证：基于STM32搭建硬件平台，完成传感器、电机驱动电路信号测试，校验PWM控制与通信稳定性，保障硬件可靠性。<br>
+‑场景功能测试：设计避障、寻迹、遥控测试用例；直线行驶偏差≤10mm，避障响应≤1s，输出测试报告，闭环处理缺陷。<br>
+‑可测性优化：硬件选型预留测试点，提升调试与故障排查效率。<br><br>
+2024.04 双音色电子琴与倒计时交互系统 个人项目<br>
+‑发声驱动开发：STM32定时器输出多频PWM，驱动蜂鸣器实现7种以上音阶输出，音色切换响应≤50ms。<br>
+‑人机交互设计：按键完成功能切换，OLED实时显示状态，交互准确率≥98%。<br>
+‑附加功能调试：实现5/10/30s倒计时，计时误差≤1%，完成多音色联调与整机稳定性验证。
     </div>
-
-    <div class="section">
-        <div class="section-title">📋 校园经历</div>
-        <div class="item-block">
-            <div class="item-head">
-                <span contenteditable="true">2023‑2025 &nbsp;&nbsp;校融媒体中心 &nbsp;&nbsp;学生干部</span>
-            </div>
-            <p contenteditable="true">协助老师负责新闻宣传、内容策划与摄影，完成30余次新闻任务，发布20余篇高浏览量公众号推文。</p>
-        </div>
-        <div class="item-block">
-            <div class="item-head">
-                <span contenteditable="true">2024‑2026 &nbsp;&nbsp;班级 &nbsp;&nbsp;心理委员 / 班干部</span>
-            </div>
-            <p contenteditable="true">担任班级心理委员，配合学院开展朋辈帮扶，服务学生120余人；牵头班级团建与学风建设，所在班级获“五四先进集体”。</p>
-        </div>
+    <div class="txt school-text" contenteditable="true">
+2023‑2025 校融媒体中心 学生干部<br>
+协助老师负责新闻宣传、内容策划与摄影，完成30余次新闻任务，发布20余篇高浏览量公众号推文。<br><br>
+2024‑2026 班级 心理委员 / 班干部<br>
+担任班级心理委员，配合学院开展朋辈帮扶，服务学生120余人；牵头班级团建与学风建设，所在班级获“五四先进集体”。
     </div>
-
-    <div class="section">
-        <div class="section-title">⚙️ 个人技能</div>
-        <ul>
-            <li contenteditable="true">熟悉嘉立创、Altium Designer、Keil、Visual Studio、Mworks、Matlab、Multisim等软件的使用。</li>
-            <li contenteditable="true">熟练使用示波器、万用表、信号源等测试仪器的使用，具备基础焊接与硬件调试能力。</li>
-            <li contenteditable="true">具备良好的电子电路基础，熟悉C、python语言，具有一定的单片机开发能力。</li>
-            <li contenteditable="true">英文水平CET‑4，掌握阅读英文数据手册的能力，能够进行电路设计与仿真。</li>
-        </ul>
+    <div class="txt skill-text" contenteditable="true">
+•熟悉嘉立创、Altium Designer、Keil、Visual Studio、Mworks、Matlab、Multisim等软件的使用。<br>
+•熟练使用示波器、万用表、信号源等测试仪器的使用，具备基础焊接与硬件调试能力。<br>
+•具备良好的电子电路基础，熟悉C、python语言，具有一定的单片机开发能力。<br>
+•英文水平CET‑4，掌握阅读英文数据手册的能力，能够进行电路设计与仿真。
     </div>
 </div>
-
 <script>
-//头像上传
-const avatarUpload=document.getElementById('avatarUpload');
+const avatarUpload=document.getElementById('avatarInput');
 const avatarImg=document.getElementById('avatarImg');
-avatarUpload.onchange=function(e){
-    const file=e.target.files[0];
-    if(!file)return;
-    const reader=new FileReader();
-    reader.onload=ev=>avatarImg.src=ev.target.result;
-    reader.readAsDataURL(file);
-}
-//导出PDF
+avatarUpload.onchange=e=>{
+    const f=e.target.files[0];
+    if(!f)return;
+    const r=new FileReader();
+    r.onload=ev=>avatarImg.src=ev.target.result;
+    r.readAsDataURL(f);
+};
 function exportPdf(){
     const opt={
-        margin:8,
+        margin:0,
         filename:"硬件测试工程师简历.pdf",
-        image:{type:'jpeg',quality:0.98},
-        html2canvas:{scale:2},
+        image:{type:'jpeg',quality:0.97},
+        html2canvas:{scale:2,useCORS:true},
         jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
     };
-    const el=document.getElementById('resume');
-    html2pdf().set(opt).from(el).save();
+    html2pdf().set(opt).from(document.querySelector(".resume-container")).save();
 }
 </script>
 </body>

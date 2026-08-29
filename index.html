@@ -6,64 +6,117 @@
 <title>Resume</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:#eee;font-family:"Times New Roman",Times,serif;font-size:12pt;}
-.toolbar{position:fixed;top:8px;left:8px;z-index:999;display:flex;gap:6px;}
-.toolbar button{padding:5px 10px;cursor:pointer;}
+body{
+  background:#eeeeee;
+  font-family:"Times New Roman",Times,serif;
+  font-size:12pt;
+}
+.toolbar{
+  position:fixed;
+  top:8px;
+  left:8px;
+  z-index:999;
+  display:flex;
+  gap:6px;
+}
+.toolbar button{
+  padding:5px 10px;
+  cursor:pointer;
+}
 
 .resume-page{
   width:210mm;
   min-height:297mm;
-  background:#fff;
+  background:#ffffff;
   margin:20px auto;
-  padding:22mm 20mm;
+  /* 严格复刻原版模板边距：左右20mm，上下12mm */
+  padding:12mm 20mm;
   position:relative;
 }
-/* 右上角照片区域 */
+/* 右上角证件照，绝对定位，不挤压文档流 */
 .photo-area{
   position:absolute;
-  top:16px;
-  right:16px;
-  width:110px;
-  height:140px;
+  top:8mm;
+  right:8mm;
+  width:100px;
+  height:130px;
   border:1px dashed #999;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:11px;
+  font-size:10px;
   color:#666;
   overflow:hidden;
 }
-.photo-area img{width:100%;height:100%;object-fit:cover;}
+.photo-area img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-h1.name{text-align:center;font-size:22pt;font-weight:bold;margin-bottom:4pt;}
-.contact-line{text-align:center;font-size:11pt;margin-bottom:18pt;}
+h1.name{
+  text-align:center;
+  font-size:22pt;
+  font-weight:bold;
+  margin-bottom:3pt;
+}
+.contact-line{
+  text-align:center;
+  font-size:11pt;
+  margin-bottom:14pt;
+}
 
 section>h2{
   font-size:13pt;
   font-weight:bold;
   text-transform:uppercase;
   padding-bottom:2pt;
-  border-bottom:1px solid #000;
-  margin:14pt 0 6pt 0;
+  border-bottom:1px solid #000000;
+  margin:12pt 0 4pt 0;
 }
 .row-two{
   display:flex;
   justify-content:space-between;
 }
-.bold{font-weight:bold;}
-ul{padding-left:18pt;margin:4pt 0 8pt 0;}
-li{margin:3pt 0;}
+.bold{
+  font-weight:bold;
+}
+ul{
+  padding-left:18pt;
+  margin:3pt 0 6pt 0;
+}
+li{
+  margin:2pt 0;
+}
+[contenteditable="true"]{
+  outline:1px dotted #aaa;
+}
 
-/*编辑虚线，打印消失*/
-[contenteditable="true"]{outline:1px dotted #aaa;}
-
-@page{size:A4;margin:0;}
+/* =========打印A4核心设置，1:1输出模板========= */
+@page{
+  size:A4;
+  margin: 12mm 20mm;
+}
 @media print{
-  body{background:#fff;}
-  .toolbar{display:none !important;}
-  .resume-page{width:100%;margin:0;padding:22mm 20mm;}
-  [contenteditable="true"]{outline:none !important;}
-  .photo-area{border:none;}
+  body{
+    background:#ffffff;
+  }
+  .toolbar{
+    display:none !important;
+  }
+  .resume-page{
+    width:100%;
+    min-height:100%;
+    margin:0;
+    padding:0;
+  }
+  /* 打印时移除编辑虚线 */
+  [contenteditable="true"]{
+    outline:none !important;
+  }
+  .photo-area{
+    border:none;
+  }
 }
 </style>
 </head>
@@ -73,13 +126,12 @@ li{margin:3pt 0;}
   <button onclick="document.getElementById('photo-input').click()">Upload Photo</button>
   <button onclick="delPhoto()">Delete Photo</button>
 </div>
-
 <input type="file" id="photo-input" accept="image/*" style="display:none"/>
 
 <div class="resume-page">
-  <!-- 右上角证件照 -->
+  <!-- 右上角照片：absolute，不会挤压标题文字 -->
   <div class="photo-area" id="photoBox">
-    <span>Click upload<br/>for photo</span>
+    <span>Upload<br/>Photo</span>
   </div>
 
   <h1 class="name" contenteditable="true">Yuting Qin</h1>
@@ -102,7 +154,7 @@ Address: ChangSha HuNan Province
     <div contenteditable="true">Cumulative GPA: 3.93/4.0; Dean's List 2015‑2016</div>
     <div contenteditable="true">Relevant Coursework: Data Analysis, Software Engineering; Operating Systems; Algorithms; Artificial Intelligence</div>
 
-    <div class="row-two" style="margin-top:6pt;">
+    <div class="row-two" style="margin-top:4pt;">
       <div class="bold" contenteditable="true">LONDON SCHOOL OF ECONOMICS AND POLITICAL SCIENCE</div>
       <div contenteditable="true">New York, NY</div>
     </div>
@@ -201,7 +253,6 @@ Address: ChangSha HuNan Province
 </div>
 
 <script>
-//上传照片
 const photoInput=document.getElementById("photo-input");
 const photoBox=document.getElementById("photoBox");
 photoInput.onchange=function(e){
@@ -214,7 +265,7 @@ photoInput.onchange=function(e){
   reader.readAsDataURL(file);
 }
 function delPhoto(){
-  photoBox.innerHTML="<span>Click upload<br/>for photo</span>";
+  photoBox.innerHTML="<span>Upload<br/>Photo</span>";
   photoInput.value="";
 }
 </script>

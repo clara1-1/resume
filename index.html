@@ -16,8 +16,8 @@
         }
         .tool-bar {
             position: fixed;
-            top:10px;
-            left:10px;
+            top:12px;
+            left:12px;
             z-index: 999;
             display:flex;
             gap:8px;
@@ -30,8 +30,8 @@
             width:210mm;
             min-height:297mm;
             background:#ffffff;
-            margin:20px auto;
-            padding:28px 32px;
+            margin:24px auto;
+            padding:30px 34px;
         }
         h1.name-title {
             text-align:center;
@@ -42,17 +42,14 @@
         .header-contact {
             text-align:center;
             font-size:14px;
-            margin-bottom:24px;
+            margin-bottom:26px;
         }
         section > h2 {
             font-size:17px;
             font-weight:bold;
             text-transform:uppercase;
-            border-bottom:1px solid #222;
-            margin:18px 0 8px 0;
-        }
-        .edu-item, .work-item, .project-item, .act-item {
-            margin-bottom:12px;
+            border-bottom:1px solid #222222;
+            margin:20px 0 8px 0;
         }
         .item-head {
             display:flex;
@@ -64,10 +61,10 @@
             display:flex;
             justify-content:space-between;
             font-size:14px;
-            margin:2px 0 4px;
+            margin:3px 0 5px;
         }
         ul {
-            padding-left:20px;
+            padding-left:22px;
             font-size:14px;
         }
         li {
@@ -77,7 +74,7 @@
             font-size:14px;
         }
         [contenteditable="true"] {
-            outline: 1px dotted #888;
+            outline: 1px dotted #777;
         }
         .privacy-mask {
             background:#cccccc;
@@ -85,11 +82,11 @@
         }
         @page {
             size:A4;
-            margin:0;
+            margin: 0;
         }
         @media print {
             body {
-                background:#fff;
+                background:#ffffff;
             }
             .tool-bar {
                 display:none !important;
@@ -97,7 +94,7 @@
             .resume-wrap {
                 width:100%;
                 margin:0;
-                padding:28px 32px;
+                padding:30px 34px;
             }
         }
     </style>
@@ -251,7 +248,6 @@
     let editMode = false;
     let privacyMode = false;
 
-    // 开启/关闭编辑
     btnEdit.onclick = ()=>{
         editMode = !editMode;
         const allEditAble = resumeDom.querySelectorAll('[contenteditable]');
@@ -261,7 +257,6 @@
         btnEdit.innerText = editMode ? '关闭编辑' : '开启编辑';
     }
 
-    //隐私遮蔽
     function applyPrivacy(){
         const privEls = document.querySelectorAll('.privacy');
         privEls.forEach(el=>{
@@ -277,7 +272,6 @@
         applyPrivacy();
         btnPrivacy.innerText = privacyMode ? '显示隐私' : '隐藏隐私';
     }
-    //url参数 ?privacy=1
     const urlParams = new URLSearchParams(window.location.search);
     if(urlParams.get('privacy') === '1'){
         privacyMode=true;
@@ -285,7 +279,6 @@
         btnPrivacy.innerText='显示隐私';
     }
 
-    //导出PDF，调用浏览器打印
     btnExport.onclick = ()=>{
         window.print();
     }

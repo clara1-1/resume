@@ -1,35 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Resume</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 body{
   background:#eeeeee;
   font-family:"Times New Roman",Times,serif;
-  font-size:10pt;   /* 全局基础字号 */
-  line-height:1.10;
+  font-size:10pt;
+  line-height:1.15;
+}
+.toolbar{
+  position:fixed;
+  top:6px;
+  right:8px;
+  z-index:999;
+  display:flex;
+  gap:5px;
+}
+.toolbar button{
+  padding:3px 8px;
+  font-size:9pt;
+  cursor:pointer;
+}
+
+.resume-page{
+  width:210mm;
+  min-height:297mm;
+  background:#ffffff;
+  margin:20px auto;
+  padding:11mm 13mm;
+  position:relative;
 }
 
 h1.name{
   text-align:center;
-  font-size:16pt;    /* 姓名，参考模板，改小 */
+  font-size:16pt;
   font-weight:bold;
   margin-bottom:2pt;
 }
 .contact-line{
   text-align:center;
-  font-size:10pt;    /* 联系信息 */
+  font-size:10pt;
   margin-bottom:10pt;
 }
 
 section>h2{
-  font-size:12pt;    /* 板块标题 EDUCATION等 */
+  font-size:12pt;
   font-weight:bold;
   text-transform:uppercase;
   padding-bottom:1pt;
   border-bottom:1px solid #000000;
   margin:9pt 0 3pt 0;
 }
-
+.row-two{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:nowrap;
+}
+.bold{
+  font-weight:bold;
+  font-size:11pt;
+}
+ul{
+  padding-left:16pt;
+  margin:2pt 0 5pt 0;
+}
 li{
   margin:1pt 0;
-  font-size:10pt; /*黑点项目正文 */
+  font-size:10pt;
 }
 .small-text{
-  font-size:10pt; /*教育备注、Additional底部 */
+  font-size:10pt;
 }
+[contenteditable="true"]{
+  outline:1px dotted #aaa;
+}
+
+@page{
+  size:A4;
+  margin:0;
+}
+@media print{
+  body{
+    background:#ffffff;
+  }
+  .toolbar{
+    display:none !important;
+  }
+  .resume-page{
+    width:100%;
+    min-height:100%;
+    margin:0;
+    padding:11mm 18mm;
+  }
+  [contenteditable="true"]{
+    outline:none !important;
+  }
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button onclick="window.print()">Export PDF</button>
+</div>
+
+<div class="resume-page">
+  <h1 class="name" contenteditable="true">Yuting Qin</h1>
+  <div class="contact-line" contenteditable="true">
+Mobile:18276232530 | Email:qin20260606@163.com<br>
+Address: ChangSha, HuNan Province
+  </div>
+
+  <section>
+    <h2 contenteditable="true">EDUCATION</h2>
+    <div class="row-two">
+      <div class="bold" contenteditable="true">RESUME WORDED UNIVERSITY</div>
+      <div contenteditable="true">Boston, MA</div>
+    </div>
+    <div class="row-two">
+      <div contenteditable="true">Bachelor of Engineering</div>
+      <div contenteditable="true">Expected May 2019</div>
+    </div>
+    <div class="small-text" contenteditable="true">Major in Computer Science; Minors in Mathematics and Psychology</div>
+    <div class="small-text" contenteditable="true">Cumulative GPA: 3.93/4.0; Dean's List 2015‑2016</div>
+    <div class="small-text" contenteditable="true">Relevant Coursework: Data Analysis, Software Engineering, Operating Systems, Algorithms, Artificial Intelligence</div>
+
+    <div class="row-two" style="margin-top:3pt;">
+      <div class="bold" contenteditable="true">LONDON SCHOOL OF ECONOMICS AND POLITICAL SCIENCE</div>
+      <div contenteditable="true">New York, NY</div>
+    </div>
+    <div class="row-two">
+      <div contenteditable="true">Study Abroad Program in International Business and Globalization</div>
+      <div contenteditable="true">Jul 2016 ‑ Jul 2017</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 contenteditable="true">WORK EXPERIENCE</h2>
+    <div class="row-two">
+      <div class="bold" contenteditable="true">RESUME WORDED & CO.</div>
+      <div contenteditable="true">New York, NY</div>
+    </div>
+    <div class="row-two">
+      <div contenteditable="true">Data Science Intern</div>
+      <div contenteditable="true">Jun 2017 ‑ Sep 2017</div>
+    </div>
+    <ul>
+      <li contenteditable="true">Built Tableau dashboard to visualize core business KPIs, saving 10 hours per week of manual reporting work.</li>
+      <li contenteditable="true">Aggregated unstructured data from 20+ sources to build the foundation of a new product; led to $100,000 in new revenue.</li>
+      <li contenteditable="true">Designed the data pipeline architecture in a team of 5 for a new product that scaled to 100,000 daily active users.</li>
+    </ul>
+
+    <div class="row-two">
+      <div class="bold" contenteditable="true">EXCITING COMPANY</div>
+      <div contenteditable="true">New York, NY</div>
+    </div>
+    <div class="row-two">
+      <div contenteditable="true">Data Analyst Intern</div>
+      <div contenteditable="true">Jun 2016 ‑ Sep 2016</div>
+    </div>
+    <ul>
+      <li contenteditable="true">Led the transition to a paperless practice by implementing an electronic booking system; reduced labor cost by 30% and office overhead by 10%.</li>
+      <li contenteditable="true">Analyzed data from 25,000 monthly active users and guided marketing and product strategies; increased average app engagement time by 2x.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 contenteditable="true">UNIVERSITY PROJECTS</h2>
+    <div class="row-two">
+      <div class="bold" contenteditable="true">RECOMMENDATION ENGINE</div>
+      <div contenteditable="true">Feb 2017</div>
+    </div>
+    <ul>
+      <li contenteditable="true">Designed and implemented a movie recommendation application in a 4‑person team using Python during a 3‑day hackathon.</li>
+      <li contenteditable="true">Enabled users to receive movie recommendations based on 50+ data points; awarded most innovative project by a Google engineer.</li>
+    </ul>
+
+    <div class="row-two">
+      <div class="bold" contenteditable="true">PINTOS ‑ MODEL OPERATING SYSTEM</div>
+      <div contenteditable="true">Jan 2016</div>
+    </div>
+    <ul>
+      <li contenteditable="true">Designed and implemented a Unix‑based operating system in a 4‑person team using C++.</li>
+      <li contenteditable="true">Awarded First Prize in Computing's Senior Design Projects out of 100 teams.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 contenteditable="true">ACTIVITIES</h2>
+    <div class="row-two">
+      <div class="bold" contenteditable="true">RESUME WORDED FINANCE SOCIETY</div>
+      <div contenteditable="true">Boston, MA</div>
+    </div>
+    <div class="row-two">
+      <div contenteditable="true">Head of Events</div>
+      <div contenteditable="true">Sep 2017 – Present</div>
+    </div>
+    <ul>
+      <li contenteditable="true">Founded the first Business Series to organize finance training for 500 students.</li>
+      <li contenteditable="true">Organized 10+ quarterly networking events with 300+ participants across 3 universities in Boston.</li>
+    </ul>
+
+    <div class="row-two">
+      <div class="bold" contenteditable="true">RWU TENNIS SOCIETY</div>
+      <div contenteditable="true">Boston, MA</div>
+    </div>
+    <div class="row-two">
+      <div contenteditable="true">Committee Member</div>
+      <div contenteditable="true">Jan 2017 – Present</div>
+    </div>
+    <ul>
+      <li contenteditable="true">Managed the launch of a new booking system to improve event organization; the system is now used across the university.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 contenteditable="true">ADDITIONAL</h2>
+    <div class="small-text" contenteditable="true">
+      <b>Technical Skills:</b> Advanced in SQL, PHP, JavaScript, HTML/CSS; Proficient in MATLAB, Python.<br>
+      <b>Languages:</b> Fluent in French, English; Conversational Proficiency in Italian, German.<br>
+      <b>Certifications & Training:</b> Online Course in Management (Coursera), Passed Resume Worded examinations.<br>
+      <b>Awards:</b> RWU's Top 30 Under 30 (2011); Won RWU's nationwide case competition out of 500+ participants (2013).
+    </div>
+  </section>
+</div>
+
+</body>
+</html>
